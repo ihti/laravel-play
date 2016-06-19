@@ -2,13 +2,22 @@ var vm = new Vue({
     el: '.container',
     data: {
         products: [],
+        total: 0,
         form: null
     },
     created: function() {
         $.get('/products', function(data) {
-            console.log(data);
             vm.products = data;
         });
+    },
+    computed: {
+        total: function() {
+            let total = 0;
+            this.products.forEach(function(product) {
+              total += product.price * product.qty;
+            });
+            return total;
+        }
     },
     methods: {
         saveProduct: function() {
@@ -37,8 +46,8 @@ var vm = new Vue({
                 type: 'PATCH',
                 data: vm.form,
                 success: function(result) {
-                    vm.products.splice(vm.editing, 1);
-                    vm.products.push(result);
+                    //vm.products.splice(vm.editing, 1);
+                    //vm.products.push(result);
                     vm.form = null;
                 }
             });

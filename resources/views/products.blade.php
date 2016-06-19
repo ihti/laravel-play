@@ -70,12 +70,12 @@
                         <th>Name</th>
                         <th>Qty</th>
                         <th>Price</th>
-                        <th>Created</th>
+                        <th>Date time</th>
                         <th>Total</th>
                         <th>Action</th>
                     </tr>
                 </thead>
-                <tr v-for="product in products">
+                <tr v-for="product in products | orderBy 'created_at' -1">
                     <td>@{{product.name}}</td>
                     <td>@{{product.qty}}</td>
                     <td>@{{product.price}}</td>
@@ -85,6 +85,11 @@
                         <a class="btn btn-danger btn-xs" v-on:click="deleteProduct(product.id)">delete</a>
                         <a class="btn btn-info btn-xs" v-on:click="editProduct(product)">edit</a>
                     </td>
+                </tr>
+                <tr>
+                    <td colspan="4"></td>
+                    <td><strong>@{{ total }}</strong></td>
+                    <td></td>
                 </tr>
             </table>
         </div>
