@@ -30,11 +30,11 @@ class ProductsController extends Controller
         return response()->json($product);
     }
 
-    public function delete(Request $request, $id)
+    public function destroy(Request $request, $id)
     {
         $product = Product::find($id);
         $product->delete($id);
 
-        return response()->json(['success' => true]);
+        return response()->json($product);
     }
 }

@@ -26,10 +26,10 @@
                             <div class="panel-heading">Add new product</div>
                             <div class="panel-body">
                                 <form class="form-horizontal" role="form">
+                                    <input type="hidden" name="id" v-model="form.id">
 
                                     <div class="form-group">
                                         <label class="col-md-4 control-label">Name</label>
-
                                         <div class="col-md-6">
                                             <input type="text" class="form-control" name="name" value="" v-model="form.name">
                                         </div>
@@ -37,7 +37,6 @@
 
                                     <div class="form-group">
                                         <label class="col-md-4 control-label">Quantity</label>
-
                                         <div class="col-md-6">
                                             <input type="number" class="form-control" name="qty" value="" v-model="form.qty">
                                         </div>
@@ -52,7 +51,7 @@
 
                                     <div class="form-group">
                                         <div class="col-md-6 col-md-offset-4">
-                                            <button type="button" class="btn btn-primary" v-on:click="addProduct()">
+                                            <button type="button" class="btn btn-primary" v-on:click="saveProduct()">
                                                 <i class="fa fa-btn fa-user"></i>Add
                                             </button>
                                         </div>
@@ -61,7 +60,7 @@
                             </div>
                         </div>
                     </div>
-                </div>`
+                </div>
 
             </div>
 
@@ -73,6 +72,7 @@
                         <td>Price</td>
                         <td>Created</td>
                         <td>Total</td>
+                        <td>Action</td>
                     </tr>
                 </thead>
                 <tr v-for="product in products">
@@ -81,6 +81,10 @@
                     <td>@{{product.price}}</td>
                     <td>@{{product.created_at}}</td>
                     <td>@{{product.price * product.qty}}</td>
+                    <td>
+                        <a class="btn btn-danger btn-xs" v-on:click="deleteProduct(product.id)">delete</a>
+                        <a class="btn btn-info btn-xs" v-on:click="editProduct(product)">edit</a>
+                    </td>
                 </tr>
             </table>
         </div>
@@ -104,22 +108,48 @@
                 });
             },
             methods: {
+                saveProduct: function() {
+                    if (this.form.id) {
+                        this.updateProduct();
+                    } else {
+                        this.addProduct();
+                    }
+                },
+
                 addProduct: function() {
                     $.post('/products', this.form,function(data) {
-                        console.log(data);
                         vm.products.push(data);
+                        vm.form = null;
                     });
                 },
-                removeProduct: function(index) {
 
+                editProduct: function(data) {
+                    vm.form = data;
                 },
-                deleteProduct: function(index) {
 
+                updateProduct: function() {
+                    $.ajax({
+                        url: '/products/' + vm.form.id,
+                        type: 'PATCH',
+                        data: vm.form,
+                        success: function(result) {
+                            vm.products.push(result, 1);
+                            vm.form = null;
+                        }
+                    });
+                },
+
+                deleteProduct: function(id, index) {
+                    $.ajax({
+                        url: '/products/' + id,
+                        type: 'DELETE',
+                        success: function(result) {
+                            vm.products.splice(result, 1);;
+                        }
+                    });
                 }
             }
         })
-
-
 
     </script>
 </html>
