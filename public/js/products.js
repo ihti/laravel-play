@@ -46,8 +46,6 @@ var vm = new Vue({
                 type: 'PATCH',
                 data: vm.form,
                 success: function(result) {
-                    //vm.products.splice(vm.editing, 1);
-                    //vm.products.push(result);
                     vm.form = null;
                 }
             });

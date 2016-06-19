@@ -16,15 +16,3 @@
     });
 
     Route::resource('products', 'ProductsController');
-
-
-
-/*
-Route::group(['middleware' => ['api']], function () {
-    Route::post('/products', 'ProductsController@create');
-    Route::patch('/products/{id}', 'ProductsController@update');
-    Route::delete('/products/{id}', 'ProductsController@delete');
-    Route::get('/products', 'ProductsController@all');
-});
-
-*/

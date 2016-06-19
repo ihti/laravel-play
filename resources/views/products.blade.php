@@ -3,7 +3,6 @@
     <head>
         <meta charset="utf-8">
         <title>Products</title>
-
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
@@ -11,13 +10,11 @@
 
     </head>
 
-
     <body>
         <div class="container">
 
             <h3>Products</h3>
             <hr>
-
 
             <div class="form">
                 <div class="row">
@@ -64,13 +61,15 @@
 
             </div>
 
+            <hr>
+
             <table class="table table-hover">
                 <thead>
                     <tr>
                         <th>Name</th>
                         <th>Qty</th>
                         <th>Price</th>
-                        <th>Date time</th>
+                        <th>Datetime</th>
                         <th>Total</th>
                         <th>Action</th>
                     </tr>
@@ -94,7 +93,6 @@
             </table>
         </div>
     </body>
-
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.25/vue.min.js"></script>
     <script src="js/products.js"></script>

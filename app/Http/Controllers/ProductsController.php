@@ -18,6 +18,7 @@ class ProductsController extends Controller
     {
         $data = $request->all();
         $product = Product::create($data);
+        
         return response()->json($product);
     }
 
