@@ -52,7 +52,7 @@
                                     <div class="form-group">
                                         <div class="col-md-6 col-md-offset-4">
                                             <button type="button" class="btn btn-primary" v-on:click="saveProduct()">
-                                                <i class="fa fa-btn fa-user"></i>Add
+                                                <i class="fa fa-btn fa-user"></i>Save
                                             </button>
                                         </div>
                                     </div>
@@ -64,15 +64,15 @@
 
             </div>
 
-            <table class="table">
+            <table class="table table-hover">
                 <thead>
                     <tr>
-                        <td>Name</td>
-                        <td>Qty</td>
-                        <td>Price</td>
-                        <td>Created</td>
-                        <td>Total</td>
-                        <td>Action</td>
+                        <th>Name</th>
+                        <th>Qty</th>
+                        <th>Price</th>
+                        <th>Created</th>
+                        <th>Total</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tr v-for="product in products">
@@ -92,64 +92,5 @@
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.25/vue.min.js"></script>
-    <script type="text/javascript">
-
-
-        var vm = new Vue({
-            el: '.container',
-            data: {
-                products: [],
-                form: null
-            },
-            created: function() {
-                $.get('/products', function(data) {
-                    console.log(data);
-                    vm.products = data;
-                });
-            },
-            methods: {
-                saveProduct: function() {
-                    if (this.form.id) {
-                        this.updateProduct();
-                    } else {
-                        this.addProduct();
-                    }
-                },
-
-                addProduct: function() {
-                    $.post('/products', this.form,function(data) {
-                        vm.products.push(data);
-                        vm.form = null;
-                    });
-                },
-
-                editProduct: function(data) {
-                    vm.form = data;
-                },
-
-                updateProduct: function() {
-                    $.ajax({
-                        url: '/products/' + vm.form.id,
-                        type: 'PATCH',
-                        data: vm.form,
-                        success: function(result) {
-                            vm.products.push(result, 1);
-                            vm.form = null;
-                        }
-                    });
-                },
-
-                deleteProduct: function(id, index) {
-                    $.ajax({
-                        url: '/products/' + id,
-                        type: 'DELETE',
-                        success: function(result) {
-                            vm.products.splice(result, 1);;
-                        }
-                    });
-                }
-            }
-        })
-
-    </script>
+    <script src="js/products.js"></script>
 </html>
